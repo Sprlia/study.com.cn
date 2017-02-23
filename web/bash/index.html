@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <title>JAVASCRIPT</title>
+        <link href="main.css" rel="stylesheet"/>
+    </head>
+
+    <script>
+window.onload = function(){
+};
+
+function titleClick(e){
+    var items = document.getElementsByClassName("title");
+    for (i=0; i <items.length; i++){
+        items[i].className = "title";;
+    }
+    e.target.className = "title selected";
+
+    var items = document.getElementsByClassName("classify");
+    for (i=0; i <items.length; i++){
+        items[i].style.cssText = "display:none";
+    }
+    var classify = e.target.nextSibling;
+    while (classify.nodeType != 1) {
+        classify = classify.nextSibling;
+    }
+    classify.style.cssText = "display:block";
+};
+
+function classifyClick(e){
+    var items = document.getElementsByClassName("section selected");
+    for (i=0; i<items.length; i++){
+        items[i].className = "section";
+    }
+    e.target.className = "selected section";
+}
+    </script>
+
+    <body>
+        <div class="content">
+            <div class="left">
+
+                <div class="item">
+                    <div class="title" onClick="titleClick(event)"></div>
+                    <div class="classify">
+                        <a class="section" href="" target="content_frame" onClick="classifyClick(event)"></a>
+                        <a class="section" href="" target="content_frame" onClick="classifyClick(event)"></a>
+                        <a class="section" href="" target="content_frame" onClick="classifyClick(event)"></a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="title" onClick="titleClick(event)"></div>
+                    <div class="classify">
+                        <a class="section" href="" target="content_frame" onClick="classifyClick(event)"></a>
+                        <a class="section" href="" target="content_frame" onClick="classifyClick(event)"></a>
+                        <a class="section" href="" target="content_frame" onClick="classifyClick(event)"></a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="right">
+                <iframe name="content_frame" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </body>
+</html>
