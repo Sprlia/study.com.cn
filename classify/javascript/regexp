@@ -4,7 +4,7 @@
                 attributes 可选参数 g:全局匹配 i:不区分大小写 m:多行匹配
 
 2：函数
-----------------------------------------------------------------
+----------------------------------------------------------
 1):search() 
     使用：stringObject.search(regexp)
     作用：在字符串中搜索指定的字符串或检索与正则表达式匹配的字符串
@@ -14,7 +14,7 @@
         console.log(str1.search(/hello/));      0
         console.log(str1.search(/hello/g));     0
 
-----------------------------------------------------------------
+----------------------------------------------------------
 2):match()
     使用：stringObject.match(regexp)
     作用：找到一个或多个正则表达式的匹配，返回匹配成功的数组。未找到返回null。
@@ -24,24 +24,65 @@
         console.log(str1.match(/hello/))    [ 'hello', index: 0, input: 'hello hello' ]
         console.log(str1.match(/hello/g))   [ 'hello', 'hello' ]
 
-----------------------------------------------------------------
+----------------------------------------------------------
 
 3):replace()
     使用：stringObject.replace(regexp/substr, replacement)
     作用：查找字符串或匹配正则表达式，替换为replacement 返回替换后的string
+    注：replacement既可以是字符串，也可以是函数，replacement中支持$ $1表示第一个匹配到的文本
+                                                                    $2表示第二个匹配到的文本
+                                                                    $&表示与regexp匹配的字符串
+                    lastMatch或regexp["$_"]表示返回任何正则表达式搜索过程中的最后匹配的字符串
+                    lastParent或regexp["$+"]表示返回任何正则表达式查找过程中的最后括号的子匹配
+                    leftContext或regexp["$`"]表示返回被查找的字符串开始的位置到最后匹配之前的位置之间的字符
+                    rightContext或regexp["$'"]表示返回被搜索的字符串中从最后匹配位置开始到字符串结尾之间的字符
+    eg:
+        var str = "hello world hello";
+        console.log(str.replace("hello", "a"));     a world hello
+        console.log(str.replace("/hello/g", "a"));     a world a
+        console.log(str.replace(/(\w+)\s* \s*(\w+)/,"$2 $1"));      world hello hello
+        console.log(str.replace(/(\w+)\s* \s*(\w+) \s*(\w+)/,"$1 $3 $2 :$&"));      hello hello world :hello world hello
+        console.log(str.replace(/(\w+)\s* \s*(\w+)/,"$2 $1 :$&"));      world hello :hello world hello
+
+        var str1 = "123fe678fe98w7fe";
+        str1.replace("/\d+/g", function(v){
+            console.log(v);     
+                    /*123
+                      678
+                      98
+                      7*/
+        });
+        str1.replace("/\d+/g", function(a, b, c, d){
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            console.log(d);
+                /* 123,123,0,123fe678fe98w7fe
+                   678,678,5,123fe678fe98w7fe
+                   98,98,10,123fe678fe98w7fe
+                   7,7,13,123fe678fe98w7fe
+                */
+        });
+----------------------------------------------------------
+
+4):split()
+    使用：
+    作用：
     注：
+    eg:
 
+3:RegExp对象方法
+1):test()
+    使用：
+    作用：
+    注：
+    eg:
 
-
-
-
-
-
-
-
-
-
-
+2):exec()
+    使用：
+    作用：
+    注：
+    eg:
 
 
 
